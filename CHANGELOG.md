@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.2 - 2026-05-31
+
+Command palette cleanup.
+
+### Changed
+
+- Renamed command palette entries to `Open` and `Reset` so Obsidian displays them as `Calculator Pro: Open` and `Calculator Pro: Reset`.
+
 ## 1.0.1 - 2026-05-31
 
 Maintenance release for Community Plugin scan cleanup.

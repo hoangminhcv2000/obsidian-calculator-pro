@@ -18,19 +18,19 @@ export default class ScientificCalculatorPlugin extends Plugin {
       (leaf) => new ScientificCalculatorView(leaf, this)
     );
 
-    this.addRibbonIcon("calculator", "Calculator Pro Open", async () => {
+    this.addRibbonIcon("calculator", "Open Calculator Pro", async () => {
       await this.activateView();
     });
 
     this.addCommand({
       id: "open",
-      name: "Calculator Pro Open",
+      name: "Open",
       callback: async () => this.activateView()
     });
 
     this.addCommand({
       id: "reset",
-      name: "Calculator Pro Reset",
+      name: "Reset",
       callback: () => {
         this.app.workspace.getLeavesOfType(VIEW_TYPE_SCIENTIFIC_CALCULATOR).forEach((leaf) => {
           const view = leaf.view;

@@ -32,8 +32,8 @@ Built with a clean and focused design philosophy, so the calculator stays simple
 
 Available commands:
 
-- Calculator Pro Open
-- Calculator Pro Reset
+- Calculator Pro: Open
+- Calculator Pro: Reset
 
 ## Installation
 
@@ -44,7 +44,7 @@ Once published:
 1. Open **Settings → Community plugins**.
 2. Search for **Calculator Pro**.
 3. Install and enable the plugin.
-4. Click the Calculator Pro icon in the left ribbon to open it, or run **Calculator Pro Open** from the command palette.
+4. Click the Calculator Pro icon in the left ribbon to open it, or run **Calculator Pro: Open** from the command palette.
 
 ## Feedback
 
