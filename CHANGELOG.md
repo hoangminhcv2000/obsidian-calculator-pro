@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.3 - 2026-05-31
+
+Settings cleanup.
+
+### Changed
+
+- Removed Settings controls for angle mode, complex mode, and view mode because these are already available directly in the calculator UI.
+- Kept Settings focused on exact fractions, display precision, and history preferences.
+
 ## 1.0.2 - 2026-05-31
 
 Command palette cleanup.

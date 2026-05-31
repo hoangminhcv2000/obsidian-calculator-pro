@@ -50,36 +50,8 @@ export class CalculatorSettingTab extends PluginSettingTab {
       .setHeading();
 
     containerEl.createEl("p", {
-      text: "Defaults for the calculator view. Complex mode always uses radians."
+      text: "Preferences that are not already available in the calculator view. Use the calculator header to switch angle, complex, and view modes."
     });
-
-    new Setting(containerEl)
-      .setName("Default angle mode")
-      .setDesc("Used for trigonometric functions when complex mode is off.")
-      .addDropdown((dropdown) => {
-        dropdown
-          .addOption("deg", "Degrees")
-          .addOption("rad", "Radians")
-          .setValue(this.plugin.settings.angleMode)
-          .onChange(async (value) => {
-            this.plugin.settings.angleMode = value as AngleMode;
-            await this.plugin.saveSettings();
-            this.plugin.refreshViews();
-          });
-      });
-
-    new Setting(containerEl)
-      .setName("Complex mode")
-      .setDesc("Enable i, complex roots, real(), imag(), conj(), and arg().")
-      .addToggle((toggle) => {
-        toggle.setValue(this.plugin.settings.complexMode).onChange(async (value) => {
-          this.plugin.settings.complexMode = value;
-          if (value) this.plugin.settings.angleMode = "rad";
-          await this.plugin.saveSettings();
-          this.plugin.refreshViews();
-          this.display();
-        });
-      });
 
     new Setting(containerEl)
       .setName("Exact fraction mode")
@@ -134,21 +106,6 @@ export class CalculatorSettingTab extends PluginSettingTab {
           this.plugin.refreshViews();
           this.display();
         });
-      });
-
-    new Setting(containerEl)
-      .setName("Default keypad")
-      .setDesc("Choose the default keypad density.")
-      .addDropdown((dropdown) => {
-        dropdown
-          .addOption("full", "Full scientific")
-          .addOption("compact", "Compact")
-          .setValue(this.plugin.settings.keypadMode)
-          .onChange(async (value) => {
-            this.plugin.settings.keypadMode = value as "full" | "compact";
-            await this.plugin.saveSettings();
-            this.plugin.refreshViews();
-          });
       });
   }
 }

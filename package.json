@@ -1,6 +1,6 @@
 {
   "name": "calculator-pro",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A clean scientific calculator with LaTeX formatting support.",
   "type": "module",
   "private": true,
