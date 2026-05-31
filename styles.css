@@ -241,7 +241,6 @@
   padding-right: 2px;
   opacity: 0.94;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
 }
 
 .msc-history-row {
@@ -390,7 +389,6 @@
   margin-top: 4px;
   overflow-wrap: anywhere;
   color: var(--text-normal);
-  font-size: clamp(30px, 5.8vw, 46px);
   font-size: clamp(28px, 9cqi, 46px);
   font-weight: 760;
   letter-spacing: -0.055em;

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1 - 2026-05-31
+
+Maintenance release for Community Plugin scan cleanup.
+
+### Changed
+
+- Removed an extra build-only dependency by using Node's native module list.
+- Removed partially supported scrollbar styling.
+- Cleaned up a duplicate result text-size CSS declaration.
+
 ## 1.0.0 - 2026-05-31
 
 Initial public release of Calculator Pro.

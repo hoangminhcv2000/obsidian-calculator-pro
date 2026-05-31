@@ -1,6 +1,6 @@
 {
   "name": "calculator-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A clean scientific calculator with LaTeX formatting support.",
   "type": "module",
   "private": true,
@@ -20,7 +20,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^24.10.1",
-    "builtin-modules": "^5.0.0",
     "esbuild": "^0.27.1",
     "obsidian": "^1.8.7",
     "tsx": "^4.21.0",
