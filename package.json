@@ -1,0 +1,29 @@
+{
+  "name": "minh-scientific-calculator",
+  "version": "1.0.0",
+  "description": "A clean design scientific calculator with LaTeX formatting support.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.mjs production",
+    "test": "tsx tests/engine.test.ts && tsx tests/format.test.ts && tsx tests/latex.test.ts && tsx tests/fuzz.test.ts",
+    "check": "tsc --noEmit && npm run test && npm run build && node scripts/check-bundle-size.mjs",
+    "bundle-size": "npm run build && node scripts/check-bundle-size.mjs",
+    "release:prepare": "npm run check && node scripts/prepare-release.mjs"
+  },
+  "keywords": [
+    "obsidian",
+    "calculator",
+    "scientific-calculator"
+  ],
+  "author": "Minh",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "builtin-modules": "^5.0.0",
+    "esbuild": "^0.27.1",
+    "obsidian": "^1.8.7",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

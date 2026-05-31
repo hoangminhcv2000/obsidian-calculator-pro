@@ -1,0 +1,10 @@
+{
+  "id": "minh-scientific-calculator",
+  "name": "Calculator",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "A clean design scientific calculator with LaTeX formatting support.",
+  "author": "Minh",
+  "authorUrl": "",
+  "isDesktopOnly": true
+}
