@@ -2,7 +2,7 @@
 
 ## 1.0.0 - 2026-05-31
 
-Initial public release of Calculator.
+Initial public release of Calculator Pro.
 
 ### Added
 

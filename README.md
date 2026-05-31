@@ -1,18 +1,18 @@
-# Calculator
+# Calculator Pro
 
-![Calculator logo](./assets/readme-v3-calculator-logo.jpg)
+![Calculator Pro logo](./assets/readme-v3-calculator-logo.jpg)
 
 A clean scientific calculator for Obsidian.
 
-Calculator gives you a fast math workspace inside your vault. It supports scientific functions, equation history, and LaTeX export for notes.
+Calculator Pro gives you a fast math workspace inside your vault. It supports scientific functions, equation history, and LaTeX export for notes.
 
-![Calculator preview](./assets/readme-v2-calculator-preview.png)
+![Calculator Pro preview](./assets/readme-v4-calculator-pro-preview.png)
 
 ## Features
 
 ### Scientific calculator
 
-If you have used Desmos Scientific Calculator, this will feel familiar. Calculator supports powers, roots, trigonometry, constants, fractions, complex numbers, statistics, and unit helpers.
+If you have used Desmos Scientific Calculator, this will feel familiar. Calculator Pro supports powers, roots, trigonometry, constants, fractions, complex numbers, statistics, and unit helpers.
 
 ![Scientific calculator](./assets/readme-v2-scientific-calculator.png)
 
@@ -26,14 +26,14 @@ Copy equations in LaTeX format for use anywhere, or insert full LaTeX equations 
 
 Built with a clean and focused design philosophy, so the calculator stays simple and easy to use.
 
-![Clean design](./assets/readme-v3-clean-design.png)
+![Clean design](./assets/readme-v4-clean-design-pro.png)
 
 ## Commands
 
 Available commands:
 
-- Calculator Open
-- Calculator Reset
+- Calculator Pro Open
+- Calculator Pro Reset
 
 ## Installation
 
@@ -42,9 +42,9 @@ Available commands:
 Once published:
 
 1. Open **Settings → Community plugins**.
-2. Search for **Calculator**.
+2. Search for **Calculator Pro**.
 3. Install and enable the plugin.
-4. Click the Calculator icon in the left ribbon to open it, or run **Calculator Open** from the command palette.
+4. Click the Calculator Pro icon in the left ribbon to open it, or run **Calculator Pro Open** from the command palette.
 
 ## Feedback
 
@@ -56,5 +56,5 @@ Found a bug or have an idea? I would love to hear from you.
 
 ## License
 
-Calculator is released under the [Apache License 2.0](./LICENSE).
+Calculator Pro is released under the [Apache License 2.0](./LICENSE).
 

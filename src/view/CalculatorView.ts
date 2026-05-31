@@ -74,7 +74,7 @@ export class ScientificCalculatorView extends ItemView {
   }
 
   getDisplayText(): string {
-    return "Calculator";
+    return "Calculator Pro";
   }
 
   getIcon(): string {
@@ -123,7 +123,7 @@ export class ScientificCalculatorView extends ItemView {
     const header = this.shellEl.createDiv({ cls: "msc-header" });
     const titleWrap = header.createDiv({ cls: "msc-title-wrap" });
     titleWrap.createDiv({ cls: "msc-eyebrow", text: this.getVaultLabel() });
-    titleWrap.createEl("h2", { cls: "msc-title", text: "Calculator" });
+    titleWrap.createEl("h2", { cls: "msc-title", text: "Calculator Pro" });
 
     const controls = header.createDiv({ cls: "msc-controls" });
     const angleButtons = this.createControlGroup(controls, "Angle", "Trig only");
@@ -170,7 +170,7 @@ export class ScientificCalculatorView extends ItemView {
         autocomplete: "off",
         autocapitalize: "off",
         spellcheck: "false",
-        "aria-label": "Calculator expression"
+        "aria-label": "Calculator Pro expression"
       }
     });
     this.expressionEl.value = this.expression;

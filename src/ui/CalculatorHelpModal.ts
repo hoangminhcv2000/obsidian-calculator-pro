@@ -10,7 +10,7 @@ export class CalculatorHelpModal extends Modal {
     contentEl.empty();
     contentEl.addClass("msc-help-modal");
 
-    contentEl.createEl("h2", { text: "Calculator help" });
+    contentEl.createEl("h2", { text: "Calculator Pro help" });
     contentEl.createEl("p", {
       text: "The controls are independent: Angle changes trigonometry, Complex enables imaginary numbers, and View changes keypad density."
     });

@@ -46,7 +46,7 @@ export class CalculatorSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     new Setting(containerEl)
-      .setName("Calculator")
+      .setName("Calculator Pro")
       .setHeading();
 
     containerEl.createEl("p", {

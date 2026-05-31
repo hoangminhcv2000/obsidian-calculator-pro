@@ -1,7 +1,7 @@
 {
-  "name": "calculator",
+  "name": "calculator-pro",
   "version": "1.0.0",
-  "description": "A clean design scientific calculator with LaTeX formatting support.",
+  "description": "A clean scientific calculator with LaTeX formatting support.",
   "type": "module",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
     "release:prepare": "npm run check && node scripts/prepare-release.mjs"
   },
   "keywords": [
+    "calculator-pro",
     "obsidian",
-    "calculator",
     "scientific-calculator"
   ],
   "author": "Minh",
