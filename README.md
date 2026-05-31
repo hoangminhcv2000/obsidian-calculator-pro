@@ -48,11 +48,8 @@ Once published:
 
 ## Feedback
 
-Found a bug or have an idea? I would love to hear from you.
+Found a bug or have an idea? [Send feedback on Ko-fi](https://ko-fi.com/i/IS6Y120HTC4).
 
-<p>
-  <a href="https://ko-fi.com/i/IS6Y120HTC4"><img alt="Send feedback" src="https://img.shields.io/badge/Send%20feedback-Ko--fi-ff5f5f?style=for-the-badge&logo=kofi&logoColor=white"></a>
-</p>
 
 ## License
 
