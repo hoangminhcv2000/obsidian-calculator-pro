@@ -30,7 +30,7 @@ Built with a clean and focused design philosophy, so the calculator stays simple
 
 ### Appearance controls
 
-Use **Settings → Calculator Pro → Appearance** to choose an accent color, keep the fixed dark Music Pro-style blue look, opt into your Obsidian theme colors, or enable a soft rainbow accent.
+Use **Settings → Calculator Pro → Appearance** to choose an accent color, keep the fixed dark Music Pro-style blue look across Obsidian themes, or enable a soft rainbow accent.
 
 ## Commands
 
@@ -58,4 +58,3 @@ Found a bug or have an idea? [Send feedback on Ko-fi](https://ko-fi.com/i/IS6Y12
 ## License
 
 Calculator Pro is released under the [Apache License 2.0](./LICENSE).
-

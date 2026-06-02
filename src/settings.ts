@@ -22,7 +22,6 @@ export interface CalculatorPluginSettings {
   exactFractionMode: boolean;
   accentColor: string;
   rainbowAccentEnabled: boolean;
-  adaptiveThemeEnabled: boolean;
 }
 
 export const DEFAULT_ACCENT_COLOR = "#2f7cf6";
@@ -52,8 +51,7 @@ export const DEFAULT_SETTINGS: CalculatorPluginSettings = {
   keypadMode: "full",
   exactFractionMode: false,
   accentColor: DEFAULT_ACCENT_COLOR,
-  rainbowAccentEnabled: false,
-  adaptiveThemeEnabled: false
+  rainbowAccentEnabled: false
 };
 
 export class CalculatorSettingTab extends PluginSettingTab {
@@ -79,7 +77,7 @@ export class CalculatorSettingTab extends PluginSettingTab {
     const appearance = this.createSettingsSection(
       containerEl,
       "Appearance",
-      "Color and background. Fixed appearance keeps Calculator Pro readable across Obsidian themes.",
+      "Color and background. Calculator Pro keeps a fixed readable appearance across Obsidian themes.",
       "calculator-pro-appearance-settings"
     );
 
@@ -102,16 +100,6 @@ export class CalculatorSettingTab extends PluginSettingTab {
         });
       });
     this.renderAccentColorPresets(appearance);
-
-    const adaptiveThemeSetting = new Setting(appearance)
-      .setName("Adaptive To Your Theme")
-      .setDesc("Use Obsidian theme colors. Off keeps the fixed Calculator Pro dark blue look.");
-    this.addBooleanButton(
-      adaptiveThemeSetting,
-      this.plugin.settings.adaptiveThemeEnabled,
-      async (value) => this.plugin.setAdaptiveThemeEnabled(value),
-      { refresh: true }
-    );
 
     const rainbowSetting = new Setting(appearance)
       .setName("Rainbow")

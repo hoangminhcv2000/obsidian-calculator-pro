@@ -8,6 +8,10 @@ import { formatLatexEquation, formatObsidianLatexBlock } from "./engine/latex";
 const RAINBOW_ACCENT_COLORS = ["#2f7cf6", "#5e5ce6", "#bf5af2", "#ff4f9a", "#ff6b4a", "#ff9f0a", "#32d74b", "#30b0c7"] as const;
 const RAINBOW_ACCENT_STEP_MS = 12_000;
 const RAINBOW_ACCENT_TICK_MS = 280;
+const MIN_PRECISION = 6;
+const MAX_PRECISION = 16;
+const MIN_HISTORY_LIMIT = 5;
+const MAX_HISTORY_LIMIT = 100;
 
 export default class ScientificCalculatorPlugin extends Plugin {
   settings: CalculatorPluginSettings = { ...DEFAULT_SETTINGS };
@@ -60,18 +64,29 @@ export default class ScientificCalculatorPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    const loaded = await this.loadData();
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, loaded, {
-      history: Array.isArray(loaded?.history) ? loaded.history : []
-    });
-    const loadedAccentColor = typeof loaded?.accentColor === "string" ? loaded.accentColor.trim().toLowerCase() : "";
-    this.settings.accentColor = this.normalizeAccentColor(
-      !loadedAccentColor || loadedAccentColor === LEGACY_CUPERTINO_ACCENT_COLOR
-        ? DEFAULT_ACCENT_COLOR
-        : loadedAccentColor
-    );
-    this.settings.rainbowAccentEnabled = Boolean(this.settings.rainbowAccentEnabled);
-    this.settings.adaptiveThemeEnabled = Boolean(this.settings.adaptiveThemeEnabled);
+    const loaded = this.asRecord(await this.loadData());
+    const loadedAccentColor = typeof loaded.accentColor === "string" ? loaded.accentColor.trim().toLowerCase() : "";
+    const historyLimit = this.clampInteger(loaded.historyLimit, DEFAULT_SETTINGS.historyLimit, MIN_HISTORY_LIMIT, MAX_HISTORY_LIMIT);
+    const hadLegacyAdaptiveTheme = Object.prototype.hasOwnProperty.call(loaded, "adaptiveThemeEnabled");
+
+    this.settings = {
+      angleMode: loaded.angleMode === "rad" ? "rad" : DEFAULT_SETTINGS.angleMode,
+      complexMode: loaded.complexMode === true,
+      precision: this.clampInteger(loaded.precision, DEFAULT_SETTINGS.precision, MIN_PRECISION, MAX_PRECISION),
+      historyLimit,
+      persistentHistory: loaded.persistentHistory === true,
+      history: this.sanitizeHistoryEntries(loaded.history, historyLimit),
+      keypadMode: loaded.keypadMode === "compact" ? "compact" : DEFAULT_SETTINGS.keypadMode,
+      exactFractionMode: loaded.exactFractionMode === true,
+      accentColor: this.normalizeAccentColor(
+        !loadedAccentColor || loadedAccentColor === LEGACY_CUPERTINO_ACCENT_COLOR
+          ? DEFAULT_ACCENT_COLOR
+          : loadedAccentColor
+      ),
+      rainbowAccentEnabled: loaded.rainbowAccentEnabled === true
+    };
+
+    if (hadLegacyAdaptiveTheme) await this.saveSettings();
   }
 
   async saveSettings(): Promise<void> {
@@ -97,28 +112,20 @@ export default class ScientificCalculatorPlugin extends Plugin {
     this.refreshViews();
   }
 
-  async setAdaptiveThemeEnabled(enabled: boolean): Promise<void> {
-    this.settings.adaptiveThemeEnabled = Boolean(enabled);
-    await this.saveSettings();
-    this.applyAccentToUi();
-    this.refreshViews();
-  }
-
   applyAccentToElement(element: HTMLElement | null | undefined, accentColor?: string): void {
     if (!element) return;
     const color = this.normalizeAccentColor(accentColor || this.getActiveAccentColor());
-    const accentKey = `bg-v2|${this.settings.adaptiveThemeEnabled ? "adaptive" : "fixed"}|${color}`;
+    const accentKey = `bg-v3|fixed|${color}`;
     if (element.getAttribute("data-calculator-pro-accent-cache") === accentKey) return;
 
-    element.toggleClass("msc-fixed-appearance", !this.settings.adaptiveThemeEnabled);
-    element.toggleClass("msc-adaptive-appearance", this.settings.adaptiveThemeEnabled);
+    element.addClass("msc-fixed-appearance");
+    element.removeClass("msc-adaptive-appearance");
     element.addClass("msc-custom-accent");
     element.removeClass("msc-theme-accent");
 
-    const usesFixedAppearance = !this.settings.adaptiveThemeEnabled;
-    const deepBase = usesFixedAppearance ? "#06111f" : "var(--background-primary)";
-    const midBase = usesFixedAppearance ? "#111722" : "var(--background-primary)";
-    const bottomBase = usesFixedAppearance ? "#0e1219" : "var(--background-primary)";
+    const deepBase = "#06111f";
+    const midBase = "#111722";
+    const bottomBase = "#0e1219";
     const onAccent = this.getOnAccentColor(color);
     element.style.setProperty("--interactive-accent", color);
     element.style.setProperty("--msc-accent", color);
@@ -135,6 +142,35 @@ export default class ScientificCalculatorPlugin extends Plugin {
     element.style.setProperty("--msc-background-bottom", `color-mix(in srgb, ${color} 5%, ${bottomBase} 95%)`);
     element.style.setProperty("--text-on-accent", onAccent);
     element.setAttribute("data-calculator-pro-accent-cache", accentKey);
+  }
+
+  private asRecord(value: unknown): Record<string, unknown> {
+    return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
+  }
+
+  private clampInteger(value: unknown, fallback: number, min: number, max: number): number {
+    const number = typeof value === "number" ? value : Number(value);
+    if (!Number.isFinite(number)) return fallback;
+    return Math.min(max, Math.max(min, Math.round(number)));
+  }
+
+  private sanitizeHistoryEntries(value: unknown, limit: number): CalculatorPluginSettings["history"] {
+    if (!Array.isArray(value)) return [];
+    const entries: CalculatorPluginSettings["history"] = [];
+
+    for (const rawEntry of value) {
+      const entry = this.asRecord(rawEntry);
+      const expression = typeof entry.expression === "string" ? entry.expression.trim() : "";
+      const display = typeof entry.display === "string" ? entry.display.trim() : "";
+      if (!expression || !display) continue;
+      const fraction = typeof entry.fraction === "string" && entry.fraction.trim() ? entry.fraction.trim() : null;
+      const rawTimestamp = typeof entry.timestamp === "number" ? entry.timestamp : Number(entry.timestamp);
+      const timestamp = Number.isFinite(rawTimestamp) && rawTimestamp > 0 ? rawTimestamp : Date.now();
+      entries.push({ expression, display, fraction, timestamp });
+      if (entries.length >= limit) break;
+    }
+
+    return entries;
   }
 
   applyAccentToUi(): void {

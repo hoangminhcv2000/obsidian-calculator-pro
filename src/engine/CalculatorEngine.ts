@@ -46,6 +46,8 @@ const MAX_TOKEN_COUNT = 320;
 const MAX_COMBINATORIC_N = 10000;
 const MAX_COMBINATORIC_R = 10000;
 const SIMPLE_FRACTION_MAX_DENOMINATOR = 1000;
+const MIN_ROUND_DIGITS = -12;
+const MAX_ROUND_DIGITS = 12;
 
 const FUNCTION_NAMES = new Set([
   "sin", "cos", "tan", "csc", "sec", "cot",
@@ -566,6 +568,9 @@ function applyFunction(name: string, args: CalcValue[], settings: EngineSettings
       if (args.length !== 1 && args.length !== 2) throw new CalculatorError("round expects one value and optional digits.");
       const value = requireReal(requireScalar(args[0], "round value"));
       const digits = args.length === 2 ? requireInteger(requireScalar(args[1], "digits"), "digits") : 0;
+      if (digits < MIN_ROUND_DIGITS || digits > MAX_ROUND_DIGITS) {
+        throw new CalculatorError(`round digits must be between ${MIN_ROUND_DIGITS} and ${MAX_ROUND_DIGITS}.`);
+      }
       const factor = Math.pow(10, digits);
       return new Complex(Math.round(value * factor) / factor);
     }

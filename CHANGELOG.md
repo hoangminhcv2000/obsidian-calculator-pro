@@ -6,16 +6,19 @@ Theme resilience and appearance controls.
 
 ### Added
 
-- Added a Music Pro-style Appearance settings section with accent color presets, fixed/adaptive theme mode, and rainbow accent mode.
+- Added a Music Pro-style Appearance settings section with accent color presets and rainbow accent mode.
 
 ### Fixed
 
 - Made LaTeX history actions readable and clickable across non-Cupertino Obsidian themes by hardening button/icon CSS and adding visible Copy/Paste labels.
 - Added a fallback clipboard path for LaTeX copy when the async clipboard API fails.
+- Removed Adaptive To Your Theme so Calculator Pro always keeps its fixed, theme-independent appearance.
+- Hardened settings loading against invalid persisted values and legacy adaptive-theme data.
+- Added regression coverage for scientific functions and guarded `round()` against extreme digit values.
 
 ### Changed
 
-- Defaulted Calculator Pro to a fixed dark Music Pro-style blue appearance while keeping Adaptive To Your Theme available as an opt-in.
+- Defaulted Calculator Pro to a fixed dark Music Pro-style blue appearance.
 - Kept the Music Pro-style top aura background in Calculator Pro and tied it to the selected accent color.
 
 ## 1.0.3 - 2026-05-31

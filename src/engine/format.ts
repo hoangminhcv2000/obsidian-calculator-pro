@@ -23,7 +23,8 @@ export function formatNumber(value: number, precision: number): string {
   if (cleaned === -Infinity) return "−∞";
   if (Number.isInteger(cleaned) && Math.abs(cleaned) < 1e21) return String(cleaned);
 
-  const safePrecision = Math.min(Math.max(Math.trunc(precision), 4), 16);
+  const normalizedPrecision = Number.isFinite(precision) ? Math.trunc(precision) : 12;
+  const safePrecision = Math.min(Math.max(normalizedPrecision, 4), 16);
   let text = cleaned.toPrecision(safePrecision);
 
   if (text.includes("e")) {

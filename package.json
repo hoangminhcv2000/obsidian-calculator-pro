@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "node esbuild.config.mjs production",
-    "test": "tsx tests/engine.test.ts && tsx tests/format.test.ts && tsx tests/latex.test.ts && tsx tests/fuzz.test.ts",
+    "test": "tsx tests/engine.test.ts && tsx tests/format.test.ts && tsx tests/latex.test.ts && tsx tests/function-regression.test.ts && tsx tests/fuzz.test.ts",
     "check": "tsc --noEmit && npm run test && npm run build && node scripts/check-bundle-size.mjs",
     "bundle-size": "npm run build && node scripts/check-bundle-size.mjs",
     "release:prepare": "npm run check && node scripts/prepare-release.mjs"
