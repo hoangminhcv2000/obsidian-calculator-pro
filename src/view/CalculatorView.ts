@@ -92,6 +92,8 @@ export class ScientificCalculatorView extends ItemView {
 
   refreshFromSettings(): void {
     this.loadHistoryFromSettings();
+    this.plugin.applyAccentToElement(this.contentEl);
+    this.plugin.applyAccentToElement(this.shellEl);
     this.updateModeButtons();
     this.updateShellMode();
     this.renderHistory();
@@ -116,9 +118,11 @@ export class ScientificCalculatorView extends ItemView {
   private render(): void {
     this.contentEl.empty();
     this.contentEl.addClass("msc-view");
+    this.plugin.applyAccentToElement(this.contentEl);
 
     this.shellEl = this.contentEl.createDiv({ cls: "msc-shell" });
     this.shellEl.tabIndex = 0;
+    this.plugin.applyAccentToElement(this.shellEl);
 
     const header = this.shellEl.createDiv({ cls: "msc-header" });
     const titleWrap = header.createDiv({ cls: "msc-title-wrap" });
@@ -364,13 +368,13 @@ export class ScientificCalculatorView extends ItemView {
     return [
       { label: "(", insert: "(", variant: "ghost" },
       { label: ")", insert: ")", variant: "ghost" },
-      { label: "Ans", insert: "ans", variant: "function" },
-      { label: "a/b", action: "fraction", variant: "function", title: "Convert result to fraction, or insert /" },
-      { label: "π", insert: "pi", variant: "function" },
-      { label: "e", insert: "e", variant: "function" },
-      { label: "x²", insert: "^2", variant: "function" },
-      { label: "xʸ", insert: "^", variant: "function" },
-      { label: "√", insert: "sqrt(", variant: "function" },
+      { label: "Ans", insert: "ans", variant: "ghost" },
+      { label: "a/b", action: "fraction", variant: "ghost", title: "Convert result to fraction, or insert /" },
+      { label: "π", insert: "pi", variant: "ghost" },
+      { label: "e", insert: "e", variant: "ghost" },
+      { label: "x²", insert: "^2", variant: "ghost" },
+      { label: "xʸ", insert: "^", variant: "ghost" },
+      { label: "√", insert: "sqrt(", variant: "ghost" },
       { label: "M", action: "memory-menu", variant: "ghost", title: "Memory actions" }
     ];
   }
@@ -379,11 +383,11 @@ export class ScientificCalculatorView extends ItemView {
     return [
       { label: "(", insert: "(", variant: "ghost" },
       { label: ")", insert: ")", variant: "ghost" },
-      { label: "Ans", insert: "ans", variant: "function" },
-      { label: "a/b", action: "fraction", variant: "function", title: "Convert result to fraction, or insert /" },
-      { label: "π", insert: "pi", variant: "function" },
-      { label: "√", insert: "sqrt(", variant: "function" },
-      { label: "xʸ", insert: "^", variant: "function" },
+      { label: "Ans", insert: "ans", variant: "ghost" },
+      { label: "a/b", action: "fraction", variant: "ghost", title: "Convert result to fraction, or insert /" },
+      { label: "π", insert: "pi", variant: "ghost" },
+      { label: "√", insert: "sqrt(", variant: "ghost" },
+      { label: "xʸ", insert: "^", variant: "ghost" },
       { label: "M", action: "memory-menu", variant: "ghost", title: "Memory actions" }
     ];
   }
@@ -767,16 +771,18 @@ export class ScientificCalculatorView extends ItemView {
         }
       });
       setIcon(copyButton, "copy");
+      copyButton.createSpan({ cls: "msc-history-action-label", text: "Copy" });
 
       const insertButton = actions.createEl("button", {
         cls: "msc-history-action msc-history-action-insert",
         attr: {
           type: "button",
-          "aria-label": "Insert full equation into last active note cursor",
-          title: "Insert full equation into last active note cursor"
+          "aria-label": "Paste full equation into the last active note cursor",
+          title: "Paste full equation into the last active note cursor"
         }
       });
       setIcon(insertButton, "corner-down-left");
+      insertButton.createSpan({ cls: "msc-history-action-label", text: "Paste" });
 
       this.registerDomEvent(copyButton, "click", async (event) => {
         event.preventDefault();
@@ -846,11 +852,45 @@ export class ScientificCalculatorView extends ItemView {
   private async copyHistoryLatexBlock(item: HistoryEntry): Promise<void> {
     const latex = this.buildHistoryLatexBlock(item);
     if (!latex) return;
-    try {
-      await navigator.clipboard.writeText(latex.block);
+    if (await this.copyTextToClipboard(latex.block)) {
       new Notice("Copied full LaTeX equation block.");
-    } catch {
+    } else {
       new Notice("Could not copy LaTeX to clipboard.");
+    }
+  }
+
+  private async copyTextToClipboard(text: string): Promise<boolean> {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      // Some desktop/theme combinations can make the async clipboard API fail.
+      // Fall back to the legacy selection path below.
+    }
+    return this.copyTextWithHiddenTextarea(text);
+  }
+
+  private copyTextWithHiddenTextarea(text: string): boolean {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "true");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "0";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, text.length);
+    try {
+      return document.execCommand("copy");
+    } catch {
+      return false;
+    } finally {
+      textarea.remove();
+      this.expressionEl?.focus();
     }
   }
 
@@ -858,7 +898,7 @@ export class ScientificCalculatorView extends ItemView {
     const latex = this.buildHistoryLatexBlock(item);
     if (!latex) return;
     if (this.plugin.insertIntoActiveEditor(latex.block)) {
-      new Notice("Inserted full LaTeX equation block.");
+      new Notice("Pasted full LaTeX equation block.");
     }
   }
 

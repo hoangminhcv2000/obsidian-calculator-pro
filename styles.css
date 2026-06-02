@@ -1,30 +1,80 @@
 .msc-view {
+  --msc-accent: var(--interactive-accent);
+  --msc-on-accent: var(--text-on-accent, #ffffff);
+  --msc-accent-strong: color-mix(in srgb, var(--msc-accent) 88%, #ffffff 12%);
+  --msc-accent-soft: color-mix(in srgb, var(--msc-accent) 13%, transparent);
   --msc-bg: color-mix(in srgb, var(--background-primary) 86%, transparent);
   --msc-panel: color-mix(in srgb, var(--background-primary) 76%, var(--background-secondary) 24%);
   --msc-elevated: color-mix(in srgb, var(--background-secondary) 70%, var(--background-primary) 30%);
   --msc-key: color-mix(in srgb, var(--background-modifier-hover) 34%, var(--background-primary) 66%);
-  --msc-key-hover: color-mix(in srgb, var(--interactive-accent) 16%, var(--background-modifier-hover) 84%);
+  --msc-key-hover: color-mix(in srgb, var(--msc-accent) 16%, var(--background-modifier-hover) 84%);
   --msc-text-muted: var(--text-muted);
   --msc-shadow: 0 14px 38px rgba(0, 0, 0, 0.12);
+  --msc-aura: var(--msc-accent);
+  --msc-background-accent: var(--msc-accent);
+  --msc-background-glow: color-mix(in srgb, var(--msc-background-accent) 40%, transparent);
+  --msc-background-soft: color-mix(in srgb, var(--msc-background-accent) 16%, transparent);
+  --msc-background-deep: color-mix(in srgb, var(--msc-background-accent) 24%, #06111f 76%);
+  --msc-background-mid: color-mix(in srgb, var(--msc-background-accent) 12%, var(--background-primary) 88%);
+  --msc-background-bottom: color-mix(in srgb, var(--msc-background-accent) 5%, var(--background-primary) 95%);
   --msc-radius-xl: 26px;
   --msc-radius-lg: 20px;
   --msc-radius-md: 14px;
+  --msc-outer-gutter: clamp(20px, 5%, 34px);
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100%;
+  padding-inline: var(--msc-outer-gutter) !important;
+  overflow-x: hidden;
   container-type: inline-size;
-  background: radial-gradient(circle at top, color-mix(in srgb, var(--interactive-accent) 10%, transparent), transparent 38%);
+  color: var(--text-normal);
+  background:
+    radial-gradient(ellipse 84% 42% at 50% -18%, var(--msc-background-glow) 0%, var(--msc-background-soft) 34%, transparent 72%),
+    radial-gradient(circle at 88% 2%, color-mix(in srgb, var(--msc-background-accent) 14%, transparent) 0%, transparent 24%),
+    linear-gradient(180deg, var(--msc-background-deep) 0%, var(--msc-background-mid) 42%, var(--background-primary) 100%);
+  background-attachment: local;
+}
+
+.workspace-leaf-content[data-type="calculator-pro-view"] .view-content.msc-view {
+  padding: 0 var(--msc-outer-gutter) !important;
+}
+
+.msc-view::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  top: -150px;
+  left: 0;
+  right: 0;
+  height: 380px;
+  background:
+    radial-gradient(ellipse at top, var(--msc-background-glow) 0%, var(--msc-background-soft) 45%, transparent 68%),
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-background-accent) 10%, transparent), transparent 72%);
+  filter: blur(24px);
+  opacity: 0.92;
 }
 
 .msc-shell {
+  position: relative;
+  z-index: 1;
   box-sizing: border-box;
-  width: min(100%, 620px);
+  width: 100%;
+  max-width: 620px;
   min-height: 100%;
   margin: 0 auto;
-  padding: 18px;
+  padding: 18px 0;
   outline: none;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif;
 }
 
 .msc-shell.is-compact {
-  width: min(100%, 460px);
+  max-width: 460px;
 }
 
 .msc-header {
@@ -49,6 +99,7 @@
 
 .msc-title {
   margin: 2px 0 0;
+  color: var(--text-normal);
   font-size: 24px;
   line-height: 1.05;
   font-weight: 760;
@@ -267,35 +318,55 @@
 }
 
 .msc-history-action {
+  -webkit-appearance: none !important;
+  appearance: none !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--background-modifier-border);
+  gap: 4px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent) !important;
   border-radius: 999px;
-  width: 24px;
-  min-width: 24px;
-  min-height: 24px;
-  padding: 0;
-  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
-  color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 850;
+  width: auto;
+  min-width: 54px;
+  min-height: 25px;
+  padding: 0 7px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
+    color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
+  color: color-mix(in srgb, var(--text-normal) 82%, var(--text-muted) 18%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045);
+  font-size: 11px;
+  font-weight: 820;
   line-height: 1;
-  opacity: 0.74;
+  opacity: 0.94;
   white-space: nowrap;
   cursor: pointer;
 }
 
 .msc-history-action svg {
+  display: block !important;
+  flex: 0 0 auto;
   width: 13px;
   height: 13px;
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: none !important;
   stroke-width: 2.4px;
 }
 
+.msc-history-action-label {
+  display: inline-block;
+  color: currentColor;
+  font-size: 10.5px;
+  font-weight: 820;
+  letter-spacing: -0.01em;
+}
+
 .msc-history-action:hover {
-  color: var(--text-on-accent);
-  background: var(--interactive-accent);
-  border-color: var(--interactive-accent);
+  color: var(--msc-on-accent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, white 10%), var(--msc-accent)) !important;
+  border-color: var(--msc-accent) !important;
   opacity: 1;
 }
 
@@ -381,6 +452,18 @@
 .msc-chip-function {
   color: var(--text-accent);
   background: color-mix(in srgb, var(--interactive-accent) 10%, var(--background-secondary));
+}
+
+.msc-quickbar .msc-chip-function,
+.msc-quickbar button.msc-chip-function {
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
+}
+
+.msc-quickbar .msc-chip-function:hover,
+.msc-quickbar button.msc-chip-function:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
 }
 
 .msc-result {
@@ -607,7 +690,7 @@
 
 @media (max-width: 520px) {
   .msc-shell {
-    padding: 12px;
+    padding: 12px 0;
   }
 
   .msc-controls {
@@ -715,8 +798,12 @@
 }
 
 @container (max-width: 480px) {
+  .msc-view {
+    --msc-outer-gutter: clamp(16px, 4.5%, 24px);
+  }
+
   .msc-shell {
-    padding: 12px;
+    padding: 12px 0;
   }
 
   .msc-title {
@@ -826,7 +913,7 @@
 
 @container (max-width: 360px) {
   .msc-shell {
-    padding: 10px;
+    padding: 10px 0;
   }
 
   .msc-controls {
@@ -868,9 +955,10 @@
   }
 
   .msc-history-action {
-    width: 22px;
-    min-width: 22px;
+    width: auto;
+    min-width: 48px;
     min-height: 22px;
+    padding: 0 5px;
   }
 
   .msc-history-action svg {
@@ -895,12 +983,18 @@
 }
 
 @container (max-width: 300px) {
+  .msc-view {
+    --msc-outer-gutter: 12px;
+  }
+
   .msc-shell {
-    padding: 8px;
+    padding: 8px 0;
   }
 
   .msc-eyebrow {
-    display: none;
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.07em;
   }
 
   .msc-title {
@@ -908,15 +1002,53 @@
   }
 
   .msc-display {
-    --msc-history-max: 0px;
-    height: clamp(176px, 76cqi, 220px);
-    min-height: 176px;
+    --msc-history-max: 104px;
+    height: clamp(210px, 78cqi, 236px);
+    min-height: 210px;
     padding: 10px;
     border-radius: 20px;
   }
 
+  .msc-display.has-result {
+    --msc-history-max: 84px;
+  }
+
   .msc-history {
-    display: none;
+    display: flex;
+    gap: 5px;
+    max-height: var(--msc-history-max);
+    margin-bottom: 6px;
+    padding-right: 0;
+  }
+
+  .msc-history-row {
+    gap: 4px;
+    padding: 3px 4px;
+  }
+
+  .msc-history-expression,
+  .msc-history-result {
+    font-size: 10.5px;
+  }
+
+  .msc-history-actions {
+    gap: 2px;
+  }
+
+  .msc-history-action {
+    min-width: 46px;
+    min-height: 22px;
+    padding: 0 4px;
+    gap: 3px;
+  }
+
+  .msc-history-action-label {
+    font-size: 9.5px;
+  }
+
+  .msc-history-action svg {
+    width: 11px;
+    height: 11px;
   }
 
   .msc-expression-row {
@@ -937,4 +1069,522 @@
     padding: 0 6px;
     font-size: 14px;
   }
+}
+
+/* Calculator Pro appearance settings and theme hardening. */
+.msc-custom-accent,
+.calculator-pro-settings.msc-custom-accent {
+  --msc-accent: var(--msc-user-accent, var(--interactive-accent));
+}
+
+.msc-theme-accent,
+.calculator-pro-settings.msc-theme-accent {
+  --msc-accent: var(--interactive-accent);
+}
+
+.msc-view.msc-fixed-appearance,
+.msc-shell.msc-fixed-appearance,
+.calculator-pro-settings.msc-fixed-appearance {
+  color-scheme: dark;
+  --background-primary: #111722;
+  --background-secondary: #1b2430;
+  --background-modifier-hover: rgba(255, 255, 255, 0.095);
+  --background-modifier-border: rgba(255, 255, 255, 0.13);
+  --text-normal: #f4f7fb;
+  --text-muted: rgba(244, 247, 251, 0.68);
+  --text-faint: rgba(244, 247, 251, 0.42);
+  --text-accent: var(--msc-accent);
+  --text-error: #ff9b8f;
+  --text-on-accent: var(--msc-on-accent, #ffffff);
+  --msc-panel: color-mix(in srgb, #1b222d 88%, transparent);
+  --msc-elevated: color-mix(in srgb, #1b2430 78%, #253246 22%);
+  --msc-key: color-mix(in srgb, #121925 72%, #243044 28%);
+  --msc-key-hover: color-mix(in srgb, var(--msc-accent) 14%, #26344a 86%);
+  --msc-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+  --msc-text-muted: var(--text-muted);
+  --msc-background-accent: var(--msc-accent);
+  --msc-background-glow: color-mix(in srgb, var(--msc-background-accent) 40%, transparent);
+  --msc-background-soft: color-mix(in srgb, var(--msc-background-accent) 16%, transparent);
+  --msc-background-deep: color-mix(in srgb, var(--msc-background-accent) 24%, #06111f 76%);
+  --msc-background-mid: color-mix(in srgb, var(--msc-background-accent) 12%, #111722 88%);
+  --msc-background-bottom: color-mix(in srgb, var(--msc-background-accent) 5%, #0e1219 95%);
+  color: var(--text-normal);
+}
+
+.msc-view.msc-fixed-appearance {
+  background:
+    radial-gradient(ellipse 82% 50% at 50% -18%, var(--msc-background-glow) 0%, var(--msc-background-soft) 38%, transparent 72%),
+    radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--msc-background-accent) 14%, transparent) 0%, transparent 25%),
+    linear-gradient(180deg, var(--msc-background-deep) 0%, var(--msc-background-mid) 40%, var(--msc-background-bottom) 100%) !important;
+}
+
+.msc-view.msc-adaptive-appearance,
+.msc-shell.msc-adaptive-appearance,
+.calculator-pro-settings.msc-adaptive-appearance {
+  color-scheme: normal;
+}
+
+.msc-view button.msc-mode-button,
+.msc-view button.msc-tab,
+.msc-view button.msc-help-button,
+.msc-view button.msc-feedback-button,
+.msc-view button.msc-chip,
+.msc-view button.msc-memory-option,
+.msc-view button.msc-key,
+.msc-view button.msc-history-action,
+.calculator-pro-settings button.calculator-pro-toggle-button,
+.calculator-pro-settings button.calculator-pro-accent-swatch,
+.calculator-pro-settings button.calculator-pro-reset-accent-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  font-family: inherit;
+}
+
+.msc-view button.msc-mode-button.is-active,
+.msc-view button.msc-tab.is-active,
+.msc-view button.msc-key-primary {
+  color: var(--msc-on-accent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, white 12%), var(--msc-accent)) !important;
+  border-color: color-mix(in srgb, var(--msc-accent) 78%, transparent) !important;
+}
+
+.msc-view button.msc-feedback-button:hover {
+  color: var(--msc-on-accent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 86%, white 10%), var(--msc-accent)) !important;
+  border-color: color-mix(in srgb, var(--msc-accent) 72%, transparent) !important;
+}
+
+.msc-view button.msc-feedback-button svg,
+.msc-view button.msc-help-button svg,
+.msc-view button.msc-key svg,
+.msc-view button.msc-chip svg,
+.msc-view button.msc-mode-button svg,
+.msc-view button.msc-tab svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+.calculator-pro-settings {
+  --msc-accent: var(--interactive-accent);
+  --msc-on-accent: var(--text-on-accent, #ffffff);
+  --msc-background-accent: var(--msc-accent);
+  --msc-background-glow: color-mix(in srgb, var(--msc-background-accent) 40%, transparent);
+  --msc-background-soft: color-mix(in srgb, var(--msc-background-accent) 16%, transparent);
+  --msc-background-deep: color-mix(in srgb, var(--msc-background-accent) 24%, #06111f 76%);
+  --msc-background-mid: color-mix(in srgb, var(--msc-background-accent) 12%, var(--background-primary) 88%);
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 36px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif;
+  background:
+    radial-gradient(ellipse 78% 48% at 50% -18%, var(--msc-background-glow) 0%, var(--msc-background-soft) 34%, transparent 72%),
+    radial-gradient(circle at 88% 2%, color-mix(in srgb, var(--msc-background-accent) 12%, transparent) 0%, transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-background-deep) 42%, transparent) 0%, transparent 78%);
+  background-attachment: local;
+}
+
+.calculator-pro-settings-hero {
+  margin: 0 0 18px;
+}
+
+.calculator-pro-settings-hero h2 {
+  margin: 0;
+  color: var(--text-normal);
+  font-size: 28px;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.calculator-pro-settings-hero p {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+}
+
+.calculator-pro-settings-section {
+  margin: 14px 0;
+  padding: 14px 16px 8px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 66%, transparent);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 44%),
+    color-mix(in srgb, var(--background-secondary) 40%, var(--background-primary) 60%);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+}
+
+.calculator-pro-settings-section-header {
+  padding: 0 2px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 42%, transparent);
+}
+
+.calculator-pro-settings-section-title {
+  color: var(--text-normal);
+  font-size: 15px;
+  font-weight: 820;
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+}
+
+.calculator-pro-settings-section-desc {
+  margin-top: 4px;
+  max-width: 680px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.38;
+}
+
+.calculator-pro-settings-section > .setting-item {
+  padding: 11px 2px;
+  border-top: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 30%, transparent);
+}
+
+.calculator-pro-settings-section > .setting-item:last-child {
+  border-bottom: 0;
+}
+
+.calculator-pro-appearance-settings input[type="color"] {
+  width: 38px;
+  height: 28px;
+  padding: 2px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 70%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--background-secondary) 60%, transparent);
+  cursor: pointer;
+}
+
+.calculator-pro-reset-accent-button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 72%, transparent) !important;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
+  color: var(--text-muted) !important;
+  box-shadow: none !important;
+}
+
+.calculator-pro-accent-palette {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 6px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 54%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--background-primary) 42%, transparent);
+}
+
+.calculator-pro-accent-palette-label {
+  flex: 1 0 100%;
+  margin: 0 0 1px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 780;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.calculator-pro-accent-swatch {
+  position: relative;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border: 1px solid color-mix(in srgb, var(--calculator-pro-swatch) 34%, var(--background-modifier-border)) !important;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--calculator-pro-swatch) 12%, var(--background-secondary)) !important;
+  color: var(--text-normal) !important;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.calculator-pro-accent-swatch-color {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 999px;
+  background-color: var(--calculator-pro-swatch);
+  background-image: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.55), transparent 34%);
+  box-shadow:
+    inset 0 -7px 10px rgba(0, 0, 0, 0.18),
+    0 0 0 1px color-mix(in srgb, var(--calculator-pro-swatch) 72%, rgba(255,255,255,0.18));
+}
+
+.calculator-pro-accent-swatch-label {
+  display: none;
+}
+
+.calculator-pro-accent-swatch:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--calculator-pro-swatch) 64%, var(--background-modifier-border)) !important;
+  background: color-mix(in srgb, var(--calculator-pro-swatch) 18%, var(--background-secondary)) !important;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--calculator-pro-swatch) 18%, transparent);
+}
+
+.calculator-pro-accent-swatch.is-active {
+  border-color: color-mix(in srgb, var(--calculator-pro-swatch) 80%, white 20%) !important;
+  background: color-mix(in srgb, var(--calculator-pro-swatch) 22%, var(--background-secondary)) !important;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--background-primary) 88%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--calculator-pro-swatch) 46%, transparent),
+    0 10px 24px color-mix(in srgb, var(--calculator-pro-swatch) 18%, transparent);
+}
+
+.calculator-pro-accent-swatch-check {
+  position: absolute;
+  left: 50%;
+  top: 49%;
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid var(--msc-on-accent, #ffffff);
+  border-bottom: 2px solid var(--msc-on-accent, #ffffff);
+  opacity: 0;
+  transform: translate(-50%, -52%) rotate(-45deg);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+}
+
+.calculator-pro-accent-swatch.is-active .calculator-pro-accent-swatch-check {
+  opacity: 1;
+}
+
+.calculator-pro-settings .calculator-pro-toggle-button {
+  min-width: 58px;
+  height: 30px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
+  color: var(--text-muted) !important;
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.calculator-pro-settings .calculator-pro-toggle-button.is-active {
+  border-color: color-mix(in srgb, var(--msc-accent) 58%, transparent) !important;
+  background: color-mix(in srgb, var(--msc-accent) 18%, var(--background-secondary)) !important;
+  color: var(--msc-accent) !important;
+}
+
+.calculator-pro-settings .calculator-pro-toggle-button svg,
+.calculator-pro-settings .calculator-pro-reset-accent-button svg {
+  width: 13px;
+  height: 13px;
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.calculator-pro-settings .calculator-pro-reset-accent-button:hover {
+  border-color: color-mix(in srgb, var(--msc-accent) 38%, var(--background-modifier-border)) !important;
+  background: color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary)) !important;
+  color: var(--text-normal) !important;
+}
+
+@container (max-width: 420px) {
+  .msc-history-actions {
+    gap: 2px;
+  }
+
+  .msc-history-action {
+    min-width: 48px;
+    padding: 0 5px;
+  }
+
+  .msc-history-action-label {
+    font-size: 10px;
+  }
+}
+
+/* Fixed appearance hardening: keep Calculator Pro independent from Obsidian theme button/input styles. */
+.msc-view.msc-fixed-appearance .msc-title,
+.msc-shell.msc-fixed-appearance .msc-title,
+.msc-view.msc-fixed-appearance h2.msc-title,
+.msc-shell.msc-fixed-appearance h2.msc-title {
+  color: var(--text-normal) !important;
+  -webkit-text-fill-color: var(--text-normal) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+.msc-view.msc-fixed-appearance .msc-eyebrow,
+.msc-shell.msc-fixed-appearance .msc-eyebrow {
+  color: var(--text-muted) !important;
+  -webkit-text-fill-color: var(--text-muted) !important;
+}
+
+.msc-view.msc-fixed-appearance .msc-display,
+.msc-shell.msc-fixed-appearance .msc-display {
+  border-color: var(--background-modifier-border) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 44%),
+    var(--msc-panel) !important;
+  color: var(--text-normal) !important;
+}
+
+.msc-view.msc-fixed-appearance .msc-expression-input,
+.msc-shell.msc-fixed-appearance .msc-expression-input {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: color-mix(in srgb, #111722 64%, transparent) !important;
+  color: var(--text-muted) !important;
+  -webkit-text-fill-color: var(--text-muted) !important;
+  border: 0 !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--background-modifier-border) 74%, transparent) !important;
+}
+
+.msc-view.msc-fixed-appearance .msc-expression-input:focus,
+.msc-shell.msc-fixed-appearance .msc-expression-input:focus {
+  color: var(--text-normal) !important;
+  -webkit-text-fill-color: var(--text-normal) !important;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--msc-accent) 64%, var(--background-modifier-border)) !important;
+}
+
+.msc-view.msc-fixed-appearance button.msc-mode-button,
+.msc-view.msc-fixed-appearance button.msc-tab,
+.msc-view.msc-fixed-appearance button.msc-help-button,
+.msc-view.msc-fixed-appearance button.msc-feedback-button,
+.msc-view.msc-fixed-appearance button.msc-chip,
+.msc-view.msc-fixed-appearance button.msc-memory-option,
+.msc-view.msc-fixed-appearance button.msc-key,
+.msc-shell.msc-fixed-appearance button.msc-mode-button,
+.msc-shell.msc-fixed-appearance button.msc-tab,
+.msc-shell.msc-fixed-appearance button.msc-help-button,
+.msc-shell.msc-fixed-appearance button.msc-feedback-button,
+.msc-shell.msc-fixed-appearance button.msc-chip,
+.msc-shell.msc-fixed-appearance button.msc-memory-option,
+.msc-shell.msc-fixed-appearance button.msc-key {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  color: color-mix(in srgb, var(--text-normal) 86%, var(--text-muted) 14%) !important;
+  border-color: color-mix(in srgb, var(--background-modifier-border) 82%, transparent) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
+    color-mix(in srgb, var(--background-secondary) 68%, #111722 32%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 7px 18px rgba(0, 0, 0, 0.12) !important;
+}
+
+.msc-view.msc-fixed-appearance button.msc-key,
+.msc-shell.msc-fixed-appearance button.msc-key {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
+    var(--msc-key) !important;
+  color: var(--text-normal) !important;
+}
+
+.msc-view.msc-fixed-appearance button.msc-key-operator,
+.msc-shell.msc-fixed-appearance button.msc-key-operator {
+  color: color-mix(in srgb, var(--text-normal) 78%, var(--msc-accent) 22%) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
+    color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary) 90%) !important;
+}
+
+.msc-view.msc-fixed-appearance button.msc-key-danger,
+.msc-shell.msc-fixed-appearance button.msc-key-danger {
+  color: var(--text-error) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
+    color-mix(in srgb, var(--text-error) 10%, var(--msc-key) 90%) !important;
+}
+
+.msc-view.msc-fixed-appearance button:hover,
+.msc-shell.msc-fixed-appearance button:hover {
+  border-color: color-mix(in srgb, var(--msc-accent) 34%, var(--background-modifier-border)) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 54%),
+    var(--msc-key-hover) !important;
+  color: var(--text-normal) !important;
+}
+
+.msc-view.msc-fixed-appearance .msc-quickbar button.msc-chip,
+.msc-shell.msc-fixed-appearance .msc-quickbar button.msc-chip,
+.msc-view.msc-fixed-appearance .msc-quickbar button.msc-chip:hover,
+.msc-shell.msc-fixed-appearance .msc-quickbar button.msc-chip:hover {
+  border-color: color-mix(in srgb, var(--background-modifier-border) 82%, transparent) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
+    color-mix(in srgb, var(--background-secondary) 68%, #111722 32%) !important;
+  color: color-mix(in srgb, var(--text-normal) 86%, var(--text-muted) 14%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 7px 18px rgba(0, 0, 0, 0.12) !important;
+}
+
+.msc-view.msc-fixed-appearance button.msc-mode-button.is-active,
+.msc-view.msc-fixed-appearance button.msc-tab.is-active,
+.msc-view.msc-fixed-appearance button.msc-key-primary,
+.msc-shell.msc-fixed-appearance button.msc-mode-button.is-active,
+.msc-shell.msc-fixed-appearance button.msc-tab.is-active,
+.msc-shell.msc-fixed-appearance button.msc-key-primary {
+  color: var(--msc-on-accent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, #ffffff 12%), var(--msc-accent)) !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--msc-accent) 28%, transparent) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance {
+  background:
+    radial-gradient(ellipse 78% 48% at 50% -18%, var(--msc-background-glow) 0%, var(--msc-background-soft) 34%, transparent 72%),
+    radial-gradient(circle at 88% 2%, color-mix(in srgb, var(--msc-background-accent) 12%, transparent) 0%, transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-background-deep) 42%, transparent) 0%, transparent 78%) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance .setting-item {
+  background: color-mix(in srgb, #111722 74%, transparent) !important;
+  color: var(--text-normal) !important;
+  border-color: color-mix(in srgb, var(--background-modifier-border) 34%, transparent) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance .setting-item-name,
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-hero h2,
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-section-title {
+  color: var(--text-normal) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance .setting-item-description,
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-hero p,
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-section-desc,
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-accent-palette-label {
+  color: var(--text-muted) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-section {
+  border-color: var(--background-modifier-border) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 44%),
+    color-mix(in srgb, #1b222d 88%, transparent) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance input[type="color"],
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-reset-accent-button {
+  border-color: color-mix(in srgb, var(--background-modifier-border) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
+  color: var(--text-muted) !important;
+}
+
+.calculator-pro-settings.msc-fixed-appearance .calculator-pro-reset-accent-button:hover {
+  border-color: color-mix(in srgb, var(--msc-accent) 38%, var(--background-modifier-border)) !important;
+  background: color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary)) !important;
+  color: var(--text-normal) !important;
 }

@@ -28,6 +28,10 @@ Built with a clean and focused design philosophy, so the calculator stays simple
 
 ![Clean design](./assets/readme-v4-clean-design-pro.png)
 
+### Appearance controls
+
+Use **Settings → Calculator Pro → Appearance** to choose an accent color, keep the fixed dark Music Pro-style blue look, opt into your Obsidian theme colors, or enable a soft rainbow accent.
+
 ## Commands
 
 Available commands:
