@@ -1,24 +1,36 @@
 # Changelog
 
+## 1.0.5 - 2026-06-03
+
+Quality and Community Plugin warning cleanup.
+
+### Fixed
+
+- Removed all `!important` declarations from Calculator Pro CSS while preserving fixed theme-independent styling.
+- Removed Adaptive To Your Theme so Calculator Pro always keeps its fixed readable appearance across Obsidian themes.
+- Hardened settings loading against invalid persisted values and legacy adaptive-theme data.
+- Guarded `round()` against extreme digit values and made number formatting safe when precision data is invalid.
+
+### Added
+
+- Added regression tests for scientific functions, aliases, complex calculations, exact fractions, and rounding edge cases.
+
 ## 1.0.4 - 2026-06-02
 
 Theme resilience and appearance controls.
 
 ### Added
 
-- Added a Music Pro-style Appearance settings section with accent color presets and rainbow accent mode.
+- Added a Music Pro-style Appearance settings section with accent color presets, fixed/adaptive theme mode, and rainbow accent mode.
 
 ### Fixed
 
 - Made LaTeX history actions readable and clickable across non-Cupertino Obsidian themes by hardening button/icon CSS and adding visible Copy/Paste labels.
 - Added a fallback clipboard path for LaTeX copy when the async clipboard API fails.
-- Removed Adaptive To Your Theme so Calculator Pro always keeps its fixed, theme-independent appearance.
-- Hardened settings loading against invalid persisted values and legacy adaptive-theme data.
-- Added regression coverage for scientific functions and guarded `round()` against extreme digit values.
 
 ### Changed
 
-- Defaulted Calculator Pro to a fixed dark Music Pro-style blue appearance.
+- Defaulted Calculator Pro to a fixed dark Music Pro-style blue appearance while keeping Adaptive To Your Theme available as an opt-in.
 - Kept the Music Pro-style top aura background in Calculator Pro and tied it to the selected accent color.
 
 ## 1.0.3 - 2026-05-31
