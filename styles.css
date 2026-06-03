@@ -29,7 +29,7 @@
   align-items: flex-start;
   width: 100%;
   min-height: 100%;
-  padding-inline: var(--msc-outer-gutter) !important;
+  padding-inline: var(--msc-outer-gutter);
   overflow-x: hidden;
   container-type: inline-size;
   color: var(--text-normal);
@@ -41,7 +41,7 @@
 }
 
 .workspace-leaf-content[data-type="calculator-pro-view"] .view-content.msc-view {
-  padding: 0 var(--msc-outer-gutter) !important;
+  padding: 0 var(--msc-outer-gutter);
 }
 
 .msc-view::before {
@@ -318,13 +318,13 @@
 }
 
 .msc-history-action {
-  -webkit-appearance: none !important;
-  appearance: none !important;
+  -webkit-appearance: none;
+  appearance: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent);
   border-radius: 999px;
   width: auto;
   min-width: 54px;
@@ -332,8 +332,8 @@
   padding: 0 7px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
-    color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
-  color: color-mix(in srgb, var(--text-normal) 82%, var(--text-muted) 18%) !important;
+    color-mix(in srgb, var(--background-secondary) 72%, transparent);
+  color: color-mix(in srgb, var(--text-normal) 82%, var(--text-muted) 18%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.045);
   font-size: 11px;
   font-weight: 820;
@@ -344,13 +344,13 @@
 }
 
 .msc-history-action svg {
-  display: block !important;
+  display: block;
   flex: 0 0 auto;
   width: 13px;
   height: 13px;
-  color: currentColor !important;
-  stroke: currentColor !important;
-  fill: none !important;
+  color: currentColor;
+  stroke: currentColor;
+  fill: none;
   stroke-width: 2.4px;
 }
 
@@ -363,10 +363,10 @@
 }
 
 .msc-history-action:hover {
-  color: var(--msc-on-accent) !important;
+  color: var(--msc-on-accent);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, white 10%), var(--msc-accent)) !important;
-  border-color: var(--msc-accent) !important;
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, white 10%), var(--msc-accent));
+  border-color: var(--msc-accent);
   opacity: 1;
 }
 
@@ -1110,7 +1110,7 @@
   background:
     radial-gradient(ellipse 82% 50% at 50% -18%, var(--msc-background-glow) 0%, var(--msc-background-soft) 38%, transparent 72%),
     radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--msc-background-accent) 14%, transparent) 0%, transparent 25%),
-    linear-gradient(180deg, var(--msc-background-deep) 0%, var(--msc-background-mid) 40%, var(--msc-background-bottom) 100%) !important;
+    linear-gradient(180deg, var(--msc-background-deep) 0%, var(--msc-background-mid) 40%, var(--msc-background-bottom) 100%);
 }
 
 .msc-view button.msc-mode-button,
@@ -1124,25 +1124,25 @@
 .calculator-pro-settings button.calculator-pro-toggle-button,
 .calculator-pro-settings button.calculator-pro-accent-swatch,
 .calculator-pro-settings button.calculator-pro-reset-accent-button {
-  -webkit-appearance: none !important;
-  appearance: none !important;
+  -webkit-appearance: none;
+  appearance: none;
   font-family: inherit;
 }
 
 .msc-view button.msc-mode-button.is-active,
 .msc-view button.msc-tab.is-active,
 .msc-view button.msc-key-primary {
-  color: var(--msc-on-accent) !important;
+  color: var(--msc-on-accent);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, white 12%), var(--msc-accent)) !important;
-  border-color: color-mix(in srgb, var(--msc-accent) 78%, transparent) !important;
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, white 12%), var(--msc-accent));
+  border-color: color-mix(in srgb, var(--msc-accent) 78%, transparent);
 }
 
 .msc-view button.msc-feedback-button:hover {
-  color: var(--msc-on-accent) !important;
+  color: var(--msc-on-accent);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 86%, white 10%), var(--msc-accent)) !important;
-  border-color: color-mix(in srgb, var(--msc-accent) 72%, transparent) !important;
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 86%, white 10%), var(--msc-accent));
+  border-color: color-mix(in srgb, var(--msc-accent) 72%, transparent);
 }
 
 .msc-view button.msc-feedback-button svg,
@@ -1151,9 +1151,9 @@
 .msc-view button.msc-chip svg,
 .msc-view button.msc-mode-button svg,
 .msc-view button.msc-tab svg {
-  color: currentColor !important;
-  stroke: currentColor !important;
-  fill: none !important;
+  color: currentColor;
+  stroke: currentColor;
+  fill: none;
 }
 
 .calculator-pro-settings {
@@ -1250,11 +1250,11 @@
   height: 30px;
   min-height: 30px;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 72%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
-  color: var(--text-muted) !important;
-  box-shadow: none !important;
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
+  color: var(--text-muted);
+  box-shadow: none;
 }
 
 .calculator-pro-accent-palette {
@@ -1289,10 +1289,10 @@
   align-items: center;
   justify-content: center;
   padding: 3px;
-  border: 1px solid color-mix(in srgb, var(--calculator-pro-swatch) 34%, var(--background-modifier-border)) !important;
+  border: 1px solid color-mix(in srgb, var(--calculator-pro-swatch) 34%, var(--background-modifier-border));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--calculator-pro-swatch) 12%, var(--background-secondary)) !important;
-  color: var(--text-normal) !important;
+  background: color-mix(in srgb, var(--calculator-pro-swatch) 12%, var(--background-secondary));
+  color: var(--text-normal);
   box-shadow: none;
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
@@ -1317,14 +1317,14 @@
 
 .calculator-pro-accent-swatch:hover {
   transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--calculator-pro-swatch) 64%, var(--background-modifier-border)) !important;
-  background: color-mix(in srgb, var(--calculator-pro-swatch) 18%, var(--background-secondary)) !important;
+  border-color: color-mix(in srgb, var(--calculator-pro-swatch) 64%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--calculator-pro-swatch) 18%, var(--background-secondary));
   box-shadow: 0 8px 20px color-mix(in srgb, var(--calculator-pro-swatch) 18%, transparent);
 }
 
 .calculator-pro-accent-swatch.is-active {
-  border-color: color-mix(in srgb, var(--calculator-pro-swatch) 80%, white 20%) !important;
-  background: color-mix(in srgb, var(--calculator-pro-swatch) 22%, var(--background-secondary)) !important;
+  border-color: color-mix(in srgb, var(--calculator-pro-swatch) 80%, white 20%);
+  background: color-mix(in srgb, var(--calculator-pro-swatch) 22%, var(--background-secondary));
   box-shadow:
     0 0 0 2px color-mix(in srgb, var(--background-primary) 88%, transparent),
     0 0 0 4px color-mix(in srgb, var(--calculator-pro-swatch) 46%, transparent),
@@ -1358,9 +1358,9 @@
   justify-content: center;
   gap: 6px;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 72%, transparent) !important;
-  background: color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
-  color: var(--text-muted) !important;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 760;
   line-height: 1;
@@ -1368,23 +1368,23 @@
 }
 
 .calculator-pro-settings .calculator-pro-toggle-button.is-active {
-  border-color: color-mix(in srgb, var(--msc-accent) 58%, transparent) !important;
-  background: color-mix(in srgb, var(--msc-accent) 18%, var(--background-secondary)) !important;
-  color: var(--msc-accent) !important;
+  border-color: color-mix(in srgb, var(--msc-accent) 58%, transparent);
+  background: color-mix(in srgb, var(--msc-accent) 18%, var(--background-secondary));
+  color: var(--msc-accent);
 }
 
 .calculator-pro-settings .calculator-pro-toggle-button svg,
 .calculator-pro-settings .calculator-pro-reset-accent-button svg {
   width: 13px;
   height: 13px;
-  color: currentColor !important;
-  stroke: currentColor !important;
+  color: currentColor;
+  stroke: currentColor;
 }
 
 .calculator-pro-settings .calculator-pro-reset-accent-button:hover {
-  border-color: color-mix(in srgb, var(--msc-accent) 38%, var(--background-modifier-border)) !important;
-  background: color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary)) !important;
-  color: var(--text-normal) !important;
+  border-color: color-mix(in srgb, var(--msc-accent) 38%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary));
+  color: var(--text-normal);
 }
 
 @container (max-width: 420px) {
@@ -1407,43 +1407,43 @@
 .msc-shell.msc-fixed-appearance .msc-title,
 .msc-view.msc-fixed-appearance h2.msc-title,
 .msc-shell.msc-fixed-appearance h2.msc-title {
-  color: var(--text-normal) !important;
-  -webkit-text-fill-color: var(--text-normal) !important;
-  background: transparent !important;
-  text-shadow: none !important;
+  color: var(--text-normal);
+  -webkit-text-fill-color: var(--text-normal);
+  background: transparent;
+  text-shadow: none;
 }
 
 .msc-view.msc-fixed-appearance .msc-eyebrow,
 .msc-shell.msc-fixed-appearance .msc-eyebrow {
-  color: var(--text-muted) !important;
-  -webkit-text-fill-color: var(--text-muted) !important;
+  color: var(--text-muted);
+  -webkit-text-fill-color: var(--text-muted);
 }
 
 .msc-view.msc-fixed-appearance .msc-display,
 .msc-shell.msc-fixed-appearance .msc-display {
-  border-color: var(--background-modifier-border) !important;
+  border-color: var(--background-modifier-border);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 44%),
-    var(--msc-panel) !important;
-  color: var(--text-normal) !important;
+    var(--msc-panel);
+  color: var(--text-normal);
 }
 
 .msc-view.msc-fixed-appearance .msc-expression-input,
 .msc-shell.msc-fixed-appearance .msc-expression-input {
-  -webkit-appearance: none !important;
-  appearance: none !important;
-  background: color-mix(in srgb, #111722 64%, transparent) !important;
-  color: var(--text-muted) !important;
-  -webkit-text-fill-color: var(--text-muted) !important;
-  border: 0 !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--background-modifier-border) 74%, transparent) !important;
+  -webkit-appearance: none;
+  appearance: none;
+  background: color-mix(in srgb, #111722 64%, transparent);
+  color: var(--text-muted);
+  -webkit-text-fill-color: var(--text-muted);
+  border: 0;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--background-modifier-border) 74%, transparent);
 }
 
 .msc-view.msc-fixed-appearance .msc-expression-input:focus,
 .msc-shell.msc-fixed-appearance .msc-expression-input:focus {
-  color: var(--text-normal) !important;
-  -webkit-text-fill-color: var(--text-normal) !important;
-  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--msc-accent) 64%, var(--background-modifier-border)) !important;
+  color: var(--text-normal);
+  -webkit-text-fill-color: var(--text-normal);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--msc-accent) 64%, var(--background-modifier-border));
 }
 
 .msc-view.msc-fixed-appearance button.msc-mode-button,
@@ -1460,63 +1460,63 @@
 .msc-shell.msc-fixed-appearance button.msc-chip,
 .msc-shell.msc-fixed-appearance button.msc-memory-option,
 .msc-shell.msc-fixed-appearance button.msc-key {
-  -webkit-appearance: none !important;
-  appearance: none !important;
-  color: color-mix(in srgb, var(--text-normal) 86%, var(--text-muted) 14%) !important;
-  border-color: color-mix(in srgb, var(--background-modifier-border) 82%, transparent) !important;
+  -webkit-appearance: none;
+  appearance: none;
+  color: color-mix(in srgb, var(--text-normal) 86%, var(--text-muted) 14%);
+  border-color: color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
-    color-mix(in srgb, var(--background-secondary) 68%, #111722 32%) !important;
+    color-mix(in srgb, var(--background-secondary) 68%, #111722 32%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.055),
-    0 7px 18px rgba(0, 0, 0, 0.12) !important;
+    0 7px 18px rgba(0, 0, 0, 0.12);
 }
 
 .msc-view.msc-fixed-appearance button.msc-key,
 .msc-shell.msc-fixed-appearance button.msc-key {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
-    var(--msc-key) !important;
-  color: var(--text-normal) !important;
+    var(--msc-key);
+  color: var(--text-normal);
 }
 
 .msc-view.msc-fixed-appearance button.msc-key-operator,
 .msc-shell.msc-fixed-appearance button.msc-key-operator {
-  color: color-mix(in srgb, var(--text-normal) 78%, var(--msc-accent) 22%) !important;
+  color: color-mix(in srgb, var(--text-normal) 78%, var(--msc-accent) 22%);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
-    color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary) 90%) !important;
+    color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary) 90%);
 }
 
 .msc-view.msc-fixed-appearance button.msc-key-danger,
 .msc-shell.msc-fixed-appearance button.msc-key-danger {
-  color: var(--text-error) !important;
+  color: var(--text-error);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
-    color-mix(in srgb, var(--text-error) 10%, var(--msc-key) 90%) !important;
+    color-mix(in srgb, var(--text-error) 10%, var(--msc-key) 90%);
 }
 
 .msc-view.msc-fixed-appearance button:hover,
 .msc-shell.msc-fixed-appearance button:hover {
-  border-color: color-mix(in srgb, var(--msc-accent) 34%, var(--background-modifier-border)) !important;
+  border-color: color-mix(in srgb, var(--msc-accent) 34%, var(--background-modifier-border));
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 54%),
-    var(--msc-key-hover) !important;
-  color: var(--text-normal) !important;
+    var(--msc-key-hover);
+  color: var(--text-normal);
 }
 
 .msc-view.msc-fixed-appearance .msc-quickbar button.msc-chip,
 .msc-shell.msc-fixed-appearance .msc-quickbar button.msc-chip,
 .msc-view.msc-fixed-appearance .msc-quickbar button.msc-chip:hover,
 .msc-shell.msc-fixed-appearance .msc-quickbar button.msc-chip:hover {
-  border-color: color-mix(in srgb, var(--background-modifier-border) 82%, transparent) !important;
+  border-color: color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%),
-    color-mix(in srgb, var(--background-secondary) 68%, #111722 32%) !important;
-  color: color-mix(in srgb, var(--text-normal) 86%, var(--text-muted) 14%) !important;
+    color-mix(in srgb, var(--background-secondary) 68%, #111722 32%);
+  color: color-mix(in srgb, var(--text-normal) 86%, var(--text-muted) 14%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.055),
-    0 7px 18px rgba(0, 0, 0, 0.12) !important;
+    0 7px 18px rgba(0, 0, 0, 0.12);
 }
 
 .msc-view.msc-fixed-appearance button.msc-mode-button.is-active,
@@ -1525,55 +1525,55 @@
 .msc-shell.msc-fixed-appearance button.msc-mode-button.is-active,
 .msc-shell.msc-fixed-appearance button.msc-tab.is-active,
 .msc-shell.msc-fixed-appearance button.msc-key-primary {
-  color: var(--msc-on-accent) !important;
+  color: var(--msc-on-accent);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, #ffffff 12%), var(--msc-accent)) !important;
-  border-color: transparent !important;
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--msc-accent) 28%, transparent) !important;
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-accent) 88%, #ffffff 12%), var(--msc-accent));
+  border-color: transparent;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--msc-accent) 28%, transparent);
 }
 
 .calculator-pro-settings.msc-fixed-appearance {
   background:
     radial-gradient(ellipse 78% 48% at 50% -18%, var(--msc-background-glow) 0%, var(--msc-background-soft) 34%, transparent 72%),
     radial-gradient(circle at 88% 2%, color-mix(in srgb, var(--msc-background-accent) 12%, transparent) 0%, transparent 24%),
-    linear-gradient(180deg, color-mix(in srgb, var(--msc-background-deep) 42%, transparent) 0%, transparent 78%) !important;
+    linear-gradient(180deg, color-mix(in srgb, var(--msc-background-deep) 42%, transparent) 0%, transparent 78%);
 }
 
 .calculator-pro-settings.msc-fixed-appearance .setting-item {
-  background: color-mix(in srgb, #111722 74%, transparent) !important;
-  color: var(--text-normal) !important;
-  border-color: color-mix(in srgb, var(--background-modifier-border) 34%, transparent) !important;
+  background: color-mix(in srgb, #111722 74%, transparent);
+  color: var(--text-normal);
+  border-color: color-mix(in srgb, var(--background-modifier-border) 34%, transparent);
 }
 
 .calculator-pro-settings.msc-fixed-appearance .setting-item-name,
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-hero h2,
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-section-title {
-  color: var(--text-normal) !important;
+  color: var(--text-normal);
 }
 
 .calculator-pro-settings.msc-fixed-appearance .setting-item-description,
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-hero p,
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-section-desc,
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-accent-palette-label {
-  color: var(--text-muted) !important;
+  color: var(--text-muted);
 }
 
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-settings-section {
-  border-color: var(--background-modifier-border) !important;
+  border-color: var(--background-modifier-border);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 44%),
-    color-mix(in srgb, #1b222d 88%, transparent) !important;
+    color-mix(in srgb, #1b222d 88%, transparent);
 }
 
 .calculator-pro-settings.msc-fixed-appearance input[type="color"],
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-reset-accent-button {
-  border-color: color-mix(in srgb, var(--background-modifier-border) 72%, transparent) !important;
-  background: color-mix(in srgb, var(--background-secondary) 72%, transparent) !important;
-  color: var(--text-muted) !important;
+  border-color: color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
+  color: var(--text-muted);
 }
 
 .calculator-pro-settings.msc-fixed-appearance .calculator-pro-reset-accent-button:hover {
-  border-color: color-mix(in srgb, var(--msc-accent) 38%, var(--background-modifier-border)) !important;
-  background: color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary)) !important;
-  color: var(--text-normal) !important;
+  border-color: color-mix(in srgb, var(--msc-accent) 38%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--msc-accent) 10%, var(--background-secondary));
+  color: var(--text-normal);
 }
