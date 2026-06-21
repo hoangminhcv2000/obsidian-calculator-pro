@@ -1,4 +1,4 @@
-import { MarkdownView, Notice, Plugin, WorkspaceLeaf, type Editor } from "obsidian";
+import { MarkdownView, Notice, Platform, Plugin, WorkspaceLeaf, type Editor } from "obsidian";
 import { VIEW_TYPE_SCIENTIFIC_CALCULATOR } from "./constants";
 import { DEFAULT_ACCENT_COLOR, DEFAULT_SETTINGS, LEGACY_CUPERTINO_ACCENT_COLOR, CalculatorPluginSettings, CalculatorSettingTab } from "./settings";
 import { ScientificCalculatorView } from "./view/CalculatorView";
@@ -24,6 +24,13 @@ export default class ScientificCalculatorPlugin extends Plugin {
 
   async onload(): Promise<void> {
     await this.loadSettings();
+    this.addSettingTab(new CalculatorSettingTab(this.app, this));
+
+    if (this.isMobileModeBlocked()) {
+      console.info("Calculator Pro: mobile mode is disabled in settings.");
+      return;
+    }
+
     this.configureRainbowAccent();
 
     this.registerView(
@@ -55,8 +62,6 @@ export default class ScientificCalculatorPlugin extends Plugin {
 
     this.registerEvent(this.app.workspace.on("active-leaf-change", () => this.rememberActiveMarkdownEditor()));
     this.rememberActiveMarkdownEditor();
-
-    this.addSettingTab(new CalculatorSettingTab(this.app, this));
   }
 
   onunload(): void {
@@ -83,7 +88,8 @@ export default class ScientificCalculatorPlugin extends Plugin {
           ? DEFAULT_ACCENT_COLOR
           : loadedAccentColor
       ),
-      rainbowAccentEnabled: loaded.rainbowAccentEnabled === true
+      rainbowAccentEnabled: loaded.rainbowAccentEnabled === true,
+      enableMobileMode: loaded.enableMobileMode === true
     };
 
     if (hadLegacyAdaptiveTheme) await this.saveSettings();
@@ -91,6 +97,18 @@ export default class ScientificCalculatorPlugin extends Plugin {
 
   async saveSettings(): Promise<void> {
     await this.saveData(this.settings);
+  }
+
+  isMobileModeBlocked(): boolean {
+    return Platform.isMobile && !this.settings.enableMobileMode;
+  }
+
+  async setMobileModeEnabled(enabled: boolean): Promise<void> {
+    this.settings.enableMobileMode = Boolean(enabled);
+    await this.saveSettings();
+    if (Platform.isMobile) {
+      new Notice("Calculator Pro: reload Obsidian to apply mobile mode.");
+    }
   }
 
   getActiveAccentColor(): string {

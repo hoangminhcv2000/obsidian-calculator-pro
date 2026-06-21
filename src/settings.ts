@@ -1,4 +1,4 @@
-import { App, Notice, PluginSettingTab, Setting } from "obsidian";
+import { App, Notice, Platform, PluginSettingTab, Setting } from "obsidian";
 import type ScientificCalculatorPlugin from "./main";
 
 export type AngleMode = "deg" | "rad";
@@ -22,6 +22,7 @@ export interface CalculatorPluginSettings {
   exactFractionMode: boolean;
   accentColor: string;
   rainbowAccentEnabled: boolean;
+  enableMobileMode: boolean;
 }
 
 export const DEFAULT_ACCENT_COLOR = "#2f7cf6";
@@ -51,7 +52,8 @@ export const DEFAULT_SETTINGS: CalculatorPluginSettings = {
   keypadMode: "full",
   exactFractionMode: false,
   accentColor: DEFAULT_ACCENT_COLOR,
-  rainbowAccentEnabled: false
+  rainbowAccentEnabled: false,
+  enableMobileMode: false
 };
 
 export class CalculatorSettingTab extends PluginSettingTab {
@@ -73,6 +75,31 @@ export class CalculatorSettingTab extends PluginSettingTab {
     hero.createEl("p", {
       text: "Preferences that are not already available in the calculator view. Use the calculator header to switch angle, complex, and view modes."
     });
+
+    const device = this.createSettingsSection(
+      containerEl,
+      "Device",
+      "Choose where Calculator Pro is allowed to run.",
+      "calculator-pro-device-settings"
+    );
+
+    new Setting(device)
+      .setName("Mobile mode")
+      .setDesc("Allow Calculator Pro to run on Obsidian Mobile. Keep this off if mobile has issues. Reload Obsidian after changing it on mobile.")
+      .addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings.enableMobileMode).onChange(async (value) => {
+          await this.plugin.setMobileModeEnabled(value);
+          if (Platform.isMobile) this.display();
+        });
+      });
+
+    if (this.plugin.isMobileModeBlocked()) {
+      containerEl.createDiv({
+        cls: "calculator-pro-settings-hint",
+        text: "Calculator Pro is disabled on this mobile device. Turn on Mobile mode above, then reload Obsidian to use it here."
+      });
+      return;
+    }
 
     const appearance = this.createSettingsSection(
       containerEl,

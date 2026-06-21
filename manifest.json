@@ -6,5 +6,5 @@
   "description": "A clean scientific calculator with LaTeX formatting support.",
   "author": "Minh",
   "authorUrl": "",
-  "isDesktopOnly": true
+  "isDesktopOnly": false
 }
